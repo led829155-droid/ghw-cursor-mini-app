@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="text-scale" content="scale">
+  <meta name="theme-color" content="#f4efe7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#12100e" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="A Pomodoro timer, daily task list, and weekly progress bar for MLH Global Hack Week: Builders Week.">
+  <title>Hack Week Focus Board</title>
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='8' fill='%23a33b1a'/&gt;&lt;rect x='7' y='14' width='18' height='4' rx='2' fill='white'/&gt;&lt;/svg&gt;">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <div>
+        <p class="eyebrow">MLH Global Hack Week · Builders Week</p>
+        <h1>Hack Week Focus Board</h1>
+      </div>
+      <p class="today" id="today"></p>
+    </header>
+
+    <main class="board">
+      <section class="card week" aria-labelledby="week-heading">
+        <div class="card-head">
+          <h2 id="week-heading">This week</h2>
+          <p id="week-detail">0 of 7 points this week.</p>
+        </div>
+        <ol class="days" id="days"></ol>
+        <label class="meter-label" for="week-progress">Points toward the weekly goal</label>
+        <progress id="week-progress" class="bar" max="7" value="0" aria-describedby="week-hint"></progress>
+        <p class="hint" id="week-hint">One point for each finished focus block or checked-off task. The bar fills at 7, about one a day.</p>
+      </section>
+
+      <section class="card timer" aria-labelledby="timer-heading">
+        <div class="card-head">
+          <h2 id="timer-heading">Timer</h2>
+        </div>
+        <fieldset class="modes">
+          <legend>Mode</legend>
+          <label><input type="radio" name="mode" value="focus" checked> Focus · 25m</label>
+          <label><input type="radio" name="mode" value="break"> Break · 5m</label>
+        </fieldset>
+        <p id="clock" class="clock" role="timer" aria-valuemin="0" aria-valuemax="1500" aria-valuenow="1500" aria-valuetext="25 minutes 0 seconds remaining">25:00</p>
+        <label class="meter-label" for="slice">This block</label>
+        <progress id="slice" class="bar" max="1500" value="0"></progress>
+        <div class="actions">
+          <button type="button" class="primary" id="toggle" aria-pressed="false">Start</button>
+          <button type="button" id="reset">Reset</button>
+        </div>
+        <p id="status" role="status">Ready for a 25 minute focus block.</p>
+      </section>
+
+      <section class="card tasks-card" aria-labelledby="tasks-heading">
+        <div class="card-head">
+          <h2 id="tasks-heading">Today</h2>
+          <p id="task-count">Nothing checked off yet</p>
+        </div>
+        <form id="task-form">
+          <label for="task-input">Add a task</label>
+          <div class="add-row">
+            <input id="task-input" name="task" type="text" maxlength="140" placeholder="What will you ship today?" required>
+            <button type="submit" class="primary">Add</button>
+          </div>
+        </form>
+        <p id="empty" class="empty">Nothing on the list yet.</p>
+        <div id="task-list" class="task-list"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Tasks and focus blocks stay in this browser. Nothing is uploaded.</p>
+      <button type="button" class="text" id="clear">Clear saved data</button>
+    </footer>
+  </div>
+  <script src="logic.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
